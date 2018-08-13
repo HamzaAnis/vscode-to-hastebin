@@ -11,16 +11,20 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.sayHello"
+        "onCommand:vscodetohaste.share"
     ],
     "main": "./out/extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.sayHello",
-                "title": "Hello Hamza World"
+                "command": "vscodetohaste.share",
+                "title": "HasteBin: Share on hastebin"
             }
-        ]
+        ],
+        "keybindings": [{
+            "command": "vscodetohaste.share",
+            "key": "ctrl+alt+h"
+        }]
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
