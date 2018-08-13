@@ -4,6 +4,10 @@
     "description": "This extension will let you share files to the hastebin (https://hastebin.com)",
     "version": "0.0.1",
     "publisher": "Hamzaanis",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/HamzaAnis/vscode-to-hastebin"
+    },
     "engines": {
         "vscode": "^1.25.0"
     },
