@@ -15,12 +15,10 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [
-            {
-                "command": "vscodetohaste.share",
-                "title": "HasteBin: Share on hastebin"
-            }
-        ],
+        "commands": [{
+            "command": "vscodetohaste.share",
+            "title": "HasteBin: Share on hastebin"
+        }],
         "keybindings": [{
             "command": "vscodetohaste.share",
             "key": "ctrl+alt+h"
@@ -39,5 +37,8 @@
         "tslint": "^5.8.0",
         "@types/node": "^7.0.43",
         "@types/mocha": "^2.2.42"
+    },
+    "dependencies": {
+        "axios": "^0.18.0"
     }
 }
