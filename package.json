@@ -2,7 +2,7 @@
     "name": "vscode-to-hastebin",
     "displayName": "VSCode to Hastebin",
     "description": "This extension will let you share files to the hastebin (https://hastebin.com)",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "HamzaAnis",
     "repository": {
         "type": "git",
@@ -21,7 +21,7 @@
     "contributes": {
         "commands": [{
             "command": "vscodetohaste.share",
-            "title": "HasteBin: Share on hastebin"
+            "title": "Hastebin: Share on hastebin"
         }],
         "keybindings": [{
             "command": "vscodetohaste.share",

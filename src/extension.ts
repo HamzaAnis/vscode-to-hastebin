@@ -2,8 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { platform } from 'os';
-import { exec, spawn } from 'child_process';
+import { spawn } from 'child_process';
 const axios = require('axios');
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
