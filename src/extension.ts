@@ -2,7 +2,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
-import { spawn } from 'child_process';
+const clipboardy = require('clipboardy');
 const axios = require('axios');
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -28,7 +28,6 @@ export function shareonhastebin() {
         return;
     } else {
         uploadCode(content);
-
     }
 }
 
@@ -45,31 +44,11 @@ export function uploadCode(code: string) {
 
 export function handleLink(key: string) {
     let url: string = "https://hastebin.com/" + key;
-    writeToClipboard(url);
-    vscode.window.showInformationMessage("URL copied to clipboard: " + url);
-}
-
-
-function writeToClipboard(url: string): void {
-    var platform: any = process ? process.platform : platform();
-    var cmd;
-    if (platform === "win32") {
-        cmd = { command: "clip", args: [] };
-    }
-    else if (platform === "darwin") {
-        cmd = { command: "pbcopy", args: [] };
-    }
-    else {
-        cmd = { command: "xclip", args: ["clipboard"] }
-    }
-    try {
-        var copyProcess = spawn(cmd.command, cmd.args);
-
-        copyProcess.stdin.write(url);
-        copyProcess.stdin.end();
-    } catch (error) {
-        vscode.window.showWarningMessage("Unable to acess clipboard" + error.message);
-    }
+    clipboardy.write(url)
+        .then(() =>
+            vscode.window.showInformationMessage("URL copied to clipboard: " + url))
+        .catch((error: string) =>
+            vscode.window.showErrorMessage("An error occurred when accessing the clipboard: " + error));
 }
 
 export function readWindow(): string {
