@@ -3,7 +3,7 @@
     "displayName": "VSCode to Hastebin",
     "description": "This extension will let you share files to the hastebin (https://hastebin.com)",
     "version": "0.0.1",
-    "publisher": "Hamzaanis",
+    "publisher": "HamzaAnis",
     "repository": {
         "type": "git",
         "url": "https://github.com/HamzaAnis/vscode-to-hastebin"
