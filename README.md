@@ -1,4 +1,8 @@
 # VSCode to Hastebin
+[![Version](https://vsmarketplacebadge.apphb.com/version-short/HamzaAnis.vscode-to-hastebin.svg
+)](https://marketplace.visualstudio.com/items?itemName=HamzaAnis.vscode-to-hastebin)
+[![Installs](https://vsmarketplacebadge.apphb.com/installs/HamzaAnis.vscode-to-hastebin.svg
+)](https://marketplace.visualstudio.com/items?itemName=HamzaAnis.vscode-to-hastebin)
 
 I made this plugin so that I can share files using hastebin server (https://hastebin.com/)
 
