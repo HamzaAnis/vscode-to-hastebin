@@ -4,6 +4,7 @@
 import * as vscode from 'vscode';
 const clipboardy = require('clipboardy');
 const axios = require('axios');
+const extname = require('path').extname;
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -43,7 +44,7 @@ export function uploadCode(code: string) {
 }
 
 export function handleLink(key: string) {
-    let url: string = "https://hastebin.com/" + key;
+    let url: string = "https://hastebin.com/" + key + extname(vscode.window.activeTextEditor.document.fileName);
     clipboardy.write(url)
         .then(() =>
             vscode.window.showInformationMessage("URL copied to clipboard: " + url))
