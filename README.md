@@ -29,10 +29,21 @@ You can install the plugin from the [VSCode marketPlace](https://marketplace.vis
 - Update readme and added badges with some few minor changes.
 
 ### 0.0.3
-- Replaced clipboard function with [clipboardy](https://www.npmjs.com/package/clipboardy)
 
+- Replaced clipboard function with [clipboardy](https://www.npmjs.com/package/clipboardy).
 - Added logo and gif for the working of the entension
+
+
+### 0.0.4
+
+- Reorganized code.
+- Added warning notification when the document has no text or is not an editable file.
+- Added extension to the end of the Hastebin link to ensure proper syntax highlighting.
+
 
 If you want to improve this extension then feel free to create a PR and if there is some issue in the extension then please open the issue on [Github](https://github.com/HamzaAnis/vscode-to-hastebin/issues)
 
 **Enjoy!**
+
+### Contributors
+[Jacob Birkett](https://github.com/spikespaz)
