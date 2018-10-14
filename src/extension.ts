@@ -15,52 +15,56 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 // Main entry point for "vscodetohaste.share" command
-export function shareOnHastebin() {
+function shareOnHastebin() {
     let content = readDocument();
 
     if (!content) {
+        vscode.window.showWarningMessage("Could not upload empty document.")
+
         return;
-    } else {
-        uploadCode(content);
     }
+
+    uploadText(content).then((response: any) => {
+        handleLink(assembleLink(response.data.key));
+    }).catch((error: any) => {
+        console.log(error);
+
+        vscode.window.showErrorMessage("An error occurred when uploading to Hastebin: " + error.message);
+    });
 }
 
 // Upload code to Hastebin and handle the resulting ID
-export function uploadCode(code: string) {
-    axios.post("https://hastebin.com/documents", code)
-        .then((response: any) => {
-            handleLink(response.data.key);
-        })
-        .catch((error: any) => {
-            console.log(error);
-
-            vscode.window.showWarningMessage("Share Code Hastebin: " + error.message);
-        });
+function uploadText(code: string): Promise<any> {
+    return axios.post("https://hastebin.com/documents", code);
 }
 
-// Handle a link by assembling a URL, copying it to clipboard, and sending notification
-export function handleLink(key: string) {
-    let url: string = "https://hastebin.com/" + key + extname(vscode.window.activeTextEditor.document.fileName);
+// Handle a link by copying it to clipboard, and sending notification
+function handleLink(link: string) {
+    clipboardy.write(link).then(() => {
+        vscode.window.showInformationMessage("URL copied to clipboard: " + link);
+    }).catch((error: string) => {
+        vscode.window.showErrorMessage("An error occurred when writing to the clipboard: " + error);
+    });
+}
 
-    clipboardy.write(url)
-        .then(() => {
-            vscode.window.showInformationMessage("URL copied to clipboard: " + url);
-        })
-        .catch((error: string) => {
-            vscode.window.showErrorMessage("An error occurred when accessing the clipboard: " + error);
-        });
+// Assemble a link from the Hastebin ID and file extension
+function assembleLink(key: string): string {
+    return "https://hastebin.com/" + key +
+        extname(vscode.window.activeTextEditor.document.fileName);
 }
 
 // Read the text from the current window's open document, or selection
-export function readDocument(): string {
+function readDocument(): string {
     let code;
 
     if (!vscode.window.activeTextEditor) {
         return;
-    } else if (!vscode.window.activeTextEditor.selection.isEmpty) {
-        code = vscode.window.activeTextEditor.document.getText(vscode.window.activeTextEditor.selection);
-    } else {
+    } else if (vscode.window.activeTextEditor.selection.isEmpty) {
         code = vscode.window.activeTextEditor.document.getText();
+    } else {
+        code = vscode.window.activeTextEditor.document.getText(
+            vscode.window.activeTextEditor.selection
+        );
     }
 
     return code;
