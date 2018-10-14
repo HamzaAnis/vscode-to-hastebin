@@ -1,30 +1,23 @@
-'use strict';
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
-const clipboardy = require('clipboardy');
-const axios = require('axios');
-const extname = require('path').extname;
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
+"use strict";
+
+// The module "vscode" contains the VS Code extensibility API
+import * as vscode from "vscode";
+const clipboardy = require("clipboardy");
+const axios = require("axios");
+const extname = require("path").extname;
+
+// Activate extension for the first time
 export function activate(context: vscode.ExtensionContext) {
+    console.log("VS Code to Hastebin loaded");
 
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('VsCode To HasteBin Loaded');
-
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('vscodetohaste.share', () => {
-        shareonhastebin();
-    });
-
-    context.subscriptions.push(disposable);
+    // Provide implimentation for command defined in "package.json"
+    context.subscriptions.push(vscode.commands.registerCommand("vscodetohaste.share", shareOnHastebin));
 }
 
-export function shareonhastebin() {
-    let content = readWindow();
+// Main entry point for "vscodetohaste.share" command
+export function shareOnHastebin() {
+    let content = readDocument();
+
     if (!content) {
         return;
     } else {
@@ -32,28 +25,36 @@ export function shareonhastebin() {
     }
 }
 
+// Upload code to Hastebin and handle the resulting ID
 export function uploadCode(code: string) {
-    axios.post('https://hastebin.com/documents', code)
-        .then(function (response: any) {
+    axios.post("https://hastebin.com/documents", code)
+        .then((response: any) => {
             handleLink(response.data.key);
         })
-        .catch(function (error: any) {
+        .catch((error: any) => {
             console.log(error);
+
             vscode.window.showWarningMessage("Share Code Hastebin: " + error.message);
         });
 }
 
+// Handle a link by assembling a URL, copying it to clipboard, and sending notification
 export function handleLink(key: string) {
     let url: string = "https://hastebin.com/" + key + extname(vscode.window.activeTextEditor.document.fileName);
+
     clipboardy.write(url)
-        .then(() =>
-            vscode.window.showInformationMessage("URL copied to clipboard: " + url))
-        .catch((error: string) =>
-            vscode.window.showErrorMessage("An error occurred when accessing the clipboard: " + error));
+        .then(() => {
+            vscode.window.showInformationMessage("URL copied to clipboard: " + url);
+        })
+        .catch((error: string) => {
+            vscode.window.showErrorMessage("An error occurred when accessing the clipboard: " + error);
+        });
 }
 
-export function readWindow(): string {
-    var code;
+// Read the text from the current window's open document, or selection
+export function readDocument(): string {
+    let code;
+
     if (!vscode.window.activeTextEditor) {
         return;
     } else if (!vscode.window.activeTextEditor.selection.isEmpty) {
@@ -61,9 +62,6 @@ export function readWindow(): string {
     } else {
         code = vscode.window.activeTextEditor.document.getText();
     }
-    return code;
-}
 
-// this method is called when your extension is deactivated
-export function deactivate() {
+    return code;
 }
