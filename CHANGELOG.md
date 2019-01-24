@@ -16,3 +16,7 @@ All notable changes to the "vscode-to-hastebin" extension will be documented in 
 - Reorganized code.
 - Added warning notification when the document has no text or is not an editable file.
 - Added extension to the end of the Hastebin link to ensure proper syntax highlighting.
+
+## [0.0.5]
+- Added configuration property for a custom hastebin host
+- Readme udpate and adding contributor
