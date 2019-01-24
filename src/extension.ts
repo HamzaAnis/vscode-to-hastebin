@@ -5,9 +5,9 @@ import { workspace as Workspace, window as Window, commands, ExtensionContext } 
 const clipboardy = require("clipboardy");
 const axios = require("axios");
 const extname = require("path").extname;
-const config = Workspace.getConfiguration("hastebin");
+const config = Workspace.getConfiguration("vscode-to-hastebin");
 const host = config.has("host") ? config.get("host") : "https://hastebin.com";
-
+console.log("Host is " + host);
 // Activate extension for the first time
 export function activate(context: ExtensionContext) {
     console.log("VS Code to Hastebin loaded");
@@ -21,7 +21,7 @@ function shareOnHastebin() {
     let content = readDocument();
 
     if (!content) {
-        Window.showWarningMessage("Could not upload empty document.")
+        Window.showWarningMessage("Could not upload empty document.");
 
         return;
     }
@@ -30,8 +30,7 @@ function shareOnHastebin() {
         handleLink(assembleLink(response.data.key));
     }).catch((error: any) => {
         console.log(error);
-
-        Window.showErrorMessage("An error occurred when uploading to Hastebin: " + error.message);
+        Window.showErrorMessage("An error occurred when uploading to " + `${host}` + ": " + error.message);
     });
 }
 
@@ -51,7 +50,7 @@ function handleLink(link: string) {
 
 // Assemble a link from the Hastebin ID and file extension
 function assembleLink(key: string): string {
-    return `${host}/${key}${extname(Window.activeTextEditor.document.fileName)}`
+    return `${host}/${key}${extname(Window.activeTextEditor.document.fileName)}`;
 }
 
 // Read the text from the current window's open document, or selection

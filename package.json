@@ -21,18 +21,25 @@
     ],
     "main": "./out/extension",
     "contributes": {
-        "commands": [
-            {
-                "command": "vscodetohaste.share",
-                "title": "Hastebin: Share on hastebin"
+        "commands": [{
+            "command": "vscodetohaste.share",
+            "title": "Hastebin: Share on hastebin"
+        }],
+        "keybindings": [{
+            "command": "vscodetohaste.share",
+            "key": "ctrl+alt+h"
+        }],
+        "configuration": {
+            "type": "object",
+            "title": "Vscode To Hastebin",
+            "properties": {
+                "vscode-to-hastebin.host": {
+                    "type": "string",
+                    "default": "https://hastebin.com",
+                    "description": "The custom hastebin server to use"
+                }
             }
-        ],
-        "keybindings": [
-            {
-                "command": "vscodetohaste.share",
-                "key": "ctrl+alt+h"
-            }
-        ]
+        }
     },
     "scripts": {
         "vscode:prepublish": "npm run compile",
