@@ -22,9 +22,12 @@ You can install the plugin from the [VSCode marketPlace](https://marketplace.vis
 
 ### Setting
 From the setting you can use the configuration to change the hastebin host using this property `vscode-to-hastebin.server`
+
+
 | Name | Description |
 | ---- | --------- |
 |`host`|`this lets you change the hastebin server`|
+
 
 If you want to improve this extension then feel free to create a PR and if there is some issue in the extension then please open the issue on [Github](https://github.com/HamzaAnis/vscode-to-hastebin/issues)
 
