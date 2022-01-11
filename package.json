@@ -1,7 +1,7 @@
 {
     "name": "vscode-to-hastebin",
     "displayName": "VSCode to Hastebin",
-    "description": "This extension will let you share files to the hastebin (https://hastebin.com)",
+    "description": "This extension will let you share files to the hastebin (https://www.toptal.com/developers/hastebin)",
     "version": "0.1.0",
     "publisher": "HamzaAnis",
     "license": "MIT",
@@ -39,7 +39,7 @@
             "properties": {
                 "vscode-to-hastebin.host": {
                     "type": "string",
-                    "default": "https://hastebin.com",
+                    "default": "https://www.toptal.com/developers/hastebin",
                     "description": "The custom hastebin server to use"
                 }
             }
@@ -53,11 +53,11 @@
         "test": "npm run compile && node ./node_modules/vscode/bin/test"
     },
     "devDependencies": {
-        "typescript": "^2.6.1",
-        "vscode": "^1.1.6",
-        "tslint": "^5.8.0",
+        "@types/mocha": "^2.2.42",
         "@types/node": "^7.0.43",
-        "@types/mocha": "^2.2.42"
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.1",
+        "vscode": "^1.1.37"
     },
     "dependencies": {
         "axios": "^0.18.1",
