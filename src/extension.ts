@@ -6,8 +6,8 @@ const clipboardy = require("clipboardy");
 const axios = require("axios");
 const extname = require("path").extname;
 const config = Workspace.getConfiguration("vscode-to-hastebin");
-const host = config.has("host") ? config.get("host") : "https://hastebin.com";
-console.log("Host is " + host);
+const host = config.has("host") ? config.get("host") : "https://www.toptal.com/developers/hastebin";
+
 // Activate extension for the first time
 export function activate(context: ExtensionContext) {
     console.log("VS Code to Hastebin loaded");
@@ -29,7 +29,6 @@ function shareOnHastebin() {
     uploadText(content).then((response: any) => {
         handleLink(assembleLink(response.data.key));
     }).catch((error: any) => {
-        console.log(error);
         Window.showErrorMessage("An error occurred when uploading to " + `${host}` + ": " + error.message);
     });
 }
