@@ -60,7 +60,7 @@
         "@types/mocha": "^2.2.42"
     },
     "dependencies": {
-        "axios": "^0.21.1",
+        "axios": "^0.21.2",
         "clipboardy": "^1.2.3"
     }
 }
